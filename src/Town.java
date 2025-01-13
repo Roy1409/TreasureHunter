@@ -12,6 +12,7 @@ public class Town {
     private String printMessage;
     private boolean toughTown;
 
+
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
      *
@@ -21,6 +22,8 @@ public class Town {
     public Town(Shop shop, double toughness) {
         this.shop = shop;
         this.terrain = getNewTerrain();
+
+
 
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
@@ -91,10 +94,14 @@ public class Town {
      */
     public void lookForTrouble() {
         double noTroubleChance;
+
         if (toughTown) {
             noTroubleChance = 0.66;
         } else {
             noTroubleChance = 0.33;
+        }
+        if (hunter.isTestLose()) {
+            noTroubleChance=0.99;
         }
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
@@ -109,8 +116,16 @@ public class Town {
                 printMessage += Hunter.Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Hunter.Colors.RESET;
                 printMessage += "\nYou lost the brawl and pay " + Hunter.Colors.YELLOW + goldDiff + Hunter.Colors.RESET + " gold.";
                 hunter.changeGold(-goldDiff);
+
+                if (hunter.getGold()<0) {
+                    System.out.println(getLatestNews());
+                    System.out.println(hunter.getHunterName()+" has 0 gold");
+                    System.out.println("GAME OVER");
+                }
             }
+
         }
+
     }
 
     public String infoString() {
