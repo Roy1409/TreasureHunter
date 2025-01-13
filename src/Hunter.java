@@ -212,4 +212,12 @@ public class Hunter {
                 public static final String WHITE = "\033[0;37m";  // WHITE
 
     }
+
+    public void addAll() {
+        addItem("water");
+        addItem("rope");
+        addItem("boat");
+        addItem("machete");
+        addItem("horse");
+    }
 }
