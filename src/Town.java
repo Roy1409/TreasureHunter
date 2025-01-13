@@ -106,15 +106,15 @@ public class Town {
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
         } else {
-            printMessage = Hunter.Colors.RED + "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n" + Hunter.Colors.RESET;
+            printMessage = Colors.RED + "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n" + Colors.RESET;
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (Math.random() > noTroubleChance) {
-                printMessage += Hunter.Colors.RED +"Okay, stranger! You proved yer mettle. Here, take my gold." + Hunter.Colors.RESET;
-                printMessage += "\nYou won the brawl and receive " + Hunter.Colors.YELLOW + goldDiff + Hunter.Colors.RESET + " gold.";
+                printMessage += Colors.RED +"Okay, stranger! You proved yer mettle. Here, take my gold." + Colors.RESET;
+                printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
                 hunter.changeGold(goldDiff);
             } else {
-                printMessage += Hunter.Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Hunter.Colors.RESET;
-                printMessage += "\nYou lost the brawl and pay " + Hunter.Colors.YELLOW + goldDiff + Hunter.Colors.RESET + " gold.";
+                printMessage += Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Colors.RESET;
+                printMessage += "\nYou lost the brawl and pay " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
                 hunter.changeGold(-goldDiff);
 
                 if (hunter.getGold()<0) {
@@ -129,7 +129,7 @@ public class Town {
     }
 
     public String infoString() {
-        return "This nice little town is surrounded by " + Hunter.Colors.CYAN + terrain.getTerrainName() + Hunter.Colors.RESET + ".";
+        return "This nice little town is surrounded by " + Colors.CYAN + terrain.getTerrainName() + Colors.RESET + ".";
     }
 
     /**
@@ -138,7 +138,7 @@ public class Town {
      * @return A Terrain object.
      */
     private Terrain getNewTerrain() {
-        double rnd = Math.random();
+        double rnd = Math.random() * (1.2);
         if (rnd < .2) {
             return new Terrain("Mountains", "Rope");
         } else if (rnd < .4) {
@@ -147,8 +147,10 @@ public class Town {
             return new Terrain("Plains", "Horse");
         } else if (rnd < .8) {
             return new Terrain("Desert", "Water");
-        } else {
+        } else if ( rnd < 1){
             return new Terrain("Jungle", "Machete");
+        } else {
+            return new Terrain("Marsh", "Boots");
         }
     }
 
