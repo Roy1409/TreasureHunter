@@ -200,6 +200,8 @@ public class Hunter {
         addItem("boots");
     }
 
+
+
     public int getGold() {
         return gold;
     }

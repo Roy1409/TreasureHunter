@@ -11,7 +11,7 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
-
+    private boolean easyMode;
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -69,7 +69,7 @@ public class Town {
             printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, you lost your "+item;
+                printMessage += "\nUnfortunately, you lost your "+item+".";
             }
             return true;
         }
@@ -94,6 +94,7 @@ public class Town {
      */
     public void lookForTrouble() {
         double noTroubleChance;
+        double win=0;
 
         if (toughTown) {
             noTroubleChance = 0.66;
@@ -103,15 +104,28 @@ public class Town {
         if (hunter.isTestLose()) {
             noTroubleChance=0.99;
         }
+        if(easyMode) {
+            win=0.90;
+            {
+
+            }
+        }
         if (Math.random() > noTroubleChance) {
             printMessage = "You couldn't find any trouble";
         } else {
             printMessage = Colors.RED + "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n" + Colors.RESET;
             int goldDiff = (int) (Math.random() * 10) + 1;
             if (Math.random() > noTroubleChance) {
-                printMessage += Colors.RED +"Okay, stranger! You proved yer mettle. Here, take my gold." + Colors.RESET;
-                printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
-                hunter.changeGold(goldDiff);
+                if(easyMode && Math.random()<win) {
+                    printMessage += Colors.RED +"Okay, stranger! You proved yer mettle. Here, take my gold." + Colors.RESET;
+                    printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
+                    hunter.changeGold(goldDiff);
+                } else{
+                    printMessage += Colors.RED +"Okay, stranger! You proved yer mettle. Here, take my gold." + Colors.RESET;
+                    printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
+                    hunter.changeGold(goldDiff);
+                }
+
             } else {
                 printMessage += Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Colors.RESET;
                 printMessage += "\nYou lost the brawl and pay " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
@@ -160,7 +174,14 @@ public class Town {
      * @return true if the item broke.
      */
     private boolean checkItemBreak() {
+        if(easyMode) {
+            return true;
+        }
         double rand = Math.random();
         return (rand < 0.5);
+    }
+
+    private void setEasy(boolean x) {
+        easyMode=x;
     }
 }
