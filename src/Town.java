@@ -119,7 +119,7 @@ public class Town {
 
                 if (hunter.getGold()<0) {
                     System.out.println(getLatestNews());
-                    System.out.println(hunter.getHunterName()+" has 0 gold");
+                    System.out.println(hunter.getHunterName()+" is in debt (-gold) ");
                     System.out.println("GAME OVER");
                 }
             }
