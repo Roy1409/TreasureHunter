@@ -144,6 +144,28 @@ public class Town {
 
     }
 
+    public String Treasure(){
+        double rnd = Math.random();
+        String treasure = "";
+        if (rnd < .25){
+            System.out.println("You found a crown!");
+            treasure = "crown";
+        } else if (rnd < .5){
+            System.out.println("You found a trophy!");
+            treasure = "trophy";
+        } else if (rnd < .75){
+            System.out.println("You found a gem!");
+            treasure = "gem";
+        } else {
+            System.out.println("You found some dust...");
+        }
+        if (!hunter.hasTreasure(treasure)){
+            return treasure;
+        } else {
+            return "you already have this treasure";
+        }
+    }
+
     public String infoString() {
         return "This nice little town is surrounded by " + Colors.CYAN + terrain.getTerrainName() + Colors.RESET + ".";
     }
