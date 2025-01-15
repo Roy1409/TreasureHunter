@@ -69,6 +69,9 @@ public class TreasureHunter {
             hunter=new Hunter(name,40);
 
         }
+        if(hard.equals("s")) {
+            Shop.setsMode(true);
+        }
         if (hard.equals("h")) {
             hardMode = true;
             hunter=new Hunter(name,10);

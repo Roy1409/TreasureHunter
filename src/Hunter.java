@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * Hunter Class<br /><br />
  * This class represents the treasure hunter character (the player) in the Treasure Hunt game.
@@ -21,7 +23,12 @@ public class Hunter {
     public Hunter(String hunterName, int startingGold) {
 
         this.hunterName = hunterName;
-        kit = new String[7]; // only 5 possible items can be stored in kit
+        if(Shop.issMode()) {
+            kit=new String[8];
+        } else{
+            kit = new String[7];
+        }
+  // only 5 possible items can be stored in kit
         gold = startingGold;
         treasures = new String[3];
     }
@@ -48,12 +55,18 @@ public class Hunter {
      * @return true if the item is successfully bought.
      */
     public boolean buyItem(String item, int costOfItem) {
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
-            return false;
+        if (!Shop.issMode() || !hasItemInKit("sword")) {
+            if(Objects.equals(item, "sword")) {
+                addItem("sword");
+            }
+            if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
+                return false;
+            }
+            gold -= costOfItem;
         }
-        gold -= costOfItem;
         addItem(item);
         return true;
+
     }
 
     /**

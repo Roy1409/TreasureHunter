@@ -15,8 +15,6 @@ public class Shop {
     private static final int BOAT_COST = 20;
     private static final int BOOTS_COST = 16;
     private static final int SHOVEL_COST=8;
-    private static boolean easyMode;
-    private static boolean hardMode;
     private static boolean sMode;
 
     // static variables
@@ -51,14 +49,19 @@ public class Shop {
             System.out.println(inventory());
             System.out.print("What're you lookin' to buy? ");
             String item = SCANNER.nextLine().toLowerCase();
+
             int cost = checkMarketPrice(item, true);
-            if (cost == 0) {
+            if (cost == 0 && !Shop.issMode()) {
                 System.out.println("We ain't got none of those.");
             } else {
+                 if(sMode && !item.equals("sword") && hunter.hasItemInKit("sword")) {
+                     System.out.println(Colors.GREEN+"The sword intimidates the shopkeeper and he gives you the item freely"+Colors.RESET);
+                     buyItem(item);
+                 } else{
                 System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
-                    buyItem(item);
+                    buyItem(item); }
                 }
             }
         } else {
@@ -93,6 +96,9 @@ public class Shop {
         str += "Boat: " + BOAT_COST + " gold\n";
         str += "Boots: " + BOOTS_COST + " gold\n";
         str+="Shovel: "+SHOVEL_COST+" gold\n";
+        if(sMode) {
+            str+="Sword: 0 gold\n";
+        }
         return str;
     }
 
@@ -103,10 +109,21 @@ public class Shop {
      */
     public void buyItem(String item) {
         int costOfItem = checkMarketPrice(item, true);
+        if(sMode) {
+            if(customer.hasItemInKit("sword") &&item.equals("sword")) {
+                System.out.println("HEY, don't get a second sword. ");
+            } else{
+            costOfItem = 0;
+            customer.buyItem(item,costOfItem);
+            }
+
+
+        } else{
         if (customer.buyItem(item, costOfItem)) {
             System.out.println("Ye' got yerself a " + item + ". Come again soon.");
+
         } else {
-            System.out.println("Hmm, either you don't have enough gold or you've already got one of those!");
+            System.out.println("Hmm, either you don't have enough gold or you've already got one of those!");}
         }
     }
 
@@ -183,5 +200,7 @@ public class Shop {
         Shop.sMode=sMode;
     }
 
-
+    public static boolean issMode() {
+        return sMode;
     }
+}
