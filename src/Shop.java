@@ -15,6 +15,9 @@ public class Shop {
     private static final int BOAT_COST = 20;
     private static final int BOOTS_COST = 16;
     private static final int SHOVEL_COST=8;
+    private static boolean easyMode;
+    private static boolean hardMode;
+    private static boolean sMode;
 
     // static variables
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -114,7 +117,8 @@ public class Shop {
      */
     public void sellItem(String item) {
         int buyBackPrice = checkMarketPrice(item, false);
-        if (customer.sellItem(item, buyBackPrice)) {
+
+            if (customer.sellItem(item, buyBackPrice)) {
             System.out.println("Pleasure doin' business with you.");
         } else {
             System.out.println("Stop stringin' me along!");
@@ -173,4 +177,11 @@ public class Shop {
         int cost = (int) (getCostOfItem(item) * markdown);
         return cost;
     }
-}
+
+
+    public static void setsMode (boolean sMode) {
+        Shop.sMode=sMode;
+    }
+
+
+    }

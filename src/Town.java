@@ -11,7 +11,7 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
-    private boolean easyMode;
+    private static boolean easyMode;
     private boolean foundGold;
 
     /**
@@ -22,6 +22,7 @@ public class Town {
      */
     public Town(Shop shop, double toughness) {
         this.shop = shop;
+
         this.terrain = getNewTerrain();
         foundGold=false;
 
