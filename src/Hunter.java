@@ -103,11 +103,13 @@ public class Hunter {
         return false;
     }
 
-    private boolean addTreasure(String treasure){
+    public boolean addTreasure(String treasure){
         if(!hasTreasure(treasure)) {
             int idx = emptyPositionInTreasure();
             treasures[idx] = treasure;
             return true;
+        } else {
+            System.out.println("You already have this treasure!");
         }
         return false;
     }
@@ -174,7 +176,7 @@ public class Hunter {
             str += " and " + Colors.PURPLE + getInventory() + Colors.RESET;
         }
         if (!treasuresIsEmpty()) {
-            str += " and " + Colors.BLUE + getTreasures() + Colors.RESET;
+            str += "and " + Colors.BLUE + getTreasures() + Colors.RESET;
         }
         return str;
     }

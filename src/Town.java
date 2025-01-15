@@ -144,25 +144,23 @@ public class Town {
 
     }
 
-    public String Treasure(){
+    public void Treasure(){
         double rnd = Math.random();
         String treasure = "";
         if (rnd < .25){
             System.out.println("You found a crown!");
             treasure = "crown";
+            hunter.addTreasure(treasure);
         } else if (rnd < .5){
             System.out.println("You found a trophy!");
             treasure = "trophy";
+            hunter.addTreasure(treasure);
         } else if (rnd < .75){
             System.out.println("You found a gem!");
             treasure = "gem";
+            hunter.addTreasure(treasure);
         } else {
             System.out.println("You found some dust...");
-        }
-        if (!hunter.hasTreasure(treasure)){
-            return treasure;
-        } else {
-            return "you already have this treasure";
         }
     }
 

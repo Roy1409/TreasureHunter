@@ -17,6 +17,7 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
     private boolean easyMode;
+    private boolean searched;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -27,6 +28,7 @@ public class TreasureHunter {
         hunter = null;
         hardMode = false;
         easyMode=false;
+        searched = false;
     }
 
     /**
@@ -94,6 +96,7 @@ public class TreasureHunter {
         // variable in this class, since we need to access the Town
         // object in other methods of this class
         currentTown = new Town(shop, toughness);
+        searched = false;
 
         // calling the hunterArrives method, which takes the Hunter
         // as a parameter; note this also could have been done in the
@@ -158,10 +161,14 @@ public class TreasureHunter {
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
         } else if (choice.equals("h")) {
-            currentTown.Treasure();
+            if (!searched) {
+                currentTown.Treasure();
+                searched = true;
+            } else {
+                System.out.println("You have already searched this town!");
+            }
         } else if(choice.equals("d" )){
             currentTown.dig();
-
         }else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }
