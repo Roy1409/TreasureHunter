@@ -54,9 +54,10 @@ public class Shop {
             if (cost == 0 && !Shop.issMode()) {
                 System.out.println("We ain't got none of those.");
             } else {
-                 if(sMode && !item.equals("sword") && hunter.hasItemInKit("sword")) {
+                 if(sMode && !item.equals("sword") && hunter.hasItemInKit("sword") ) {
+                     if(cost != 0) {
                      System.out.println(Colors.GREEN+"The sword intimidates the shopkeeper and he gives you the item freely"+Colors.RESET);
-                     buyItem(item);
+                     buyItem(item);}
                  } else{
                 System.out.print("It'll cost you " + cost + " gold. Buy it (y/n)? ");
                 String option = SCANNER.nextLine().toLowerCase();
