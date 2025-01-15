@@ -179,9 +179,7 @@ public class Town {
         } else {
             System.out.println("You found some dust...");
         }
-        if (count == 3){
-            TreasureHunter.win(true);
-        }
+
     }
 
     public String infoString() {
