@@ -33,9 +33,6 @@ public class TreasureHunter {
         win = false;
     }
 
-    public static void win(boolean win){
-        this.win = win;
-    }
 
     /**
      * Starts the game; this is the only public method
