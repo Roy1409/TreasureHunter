@@ -18,6 +18,7 @@ public class TreasureHunter {
     private boolean hardMode;
     private boolean easyMode;
     private boolean searched;
+    private boolean win;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -29,15 +30,24 @@ public class TreasureHunter {
         hardMode = false;
         easyMode=false;
         searched = false;
+        win = false;
+    }
+
+    public static void win(boolean win){
+        this.win = win;
     }
 
     /**
      * Starts the game; this is the only public method
      */
     public void play() {
-        welcomePlayer();
-        enterTown();
-        showMenu();
+            welcomePlayer();
+            if (!win) {
+                enterTown();
+                showMenu();
+            } else {
+                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+            }
     }
 
     /**
@@ -108,6 +118,7 @@ public class TreasureHunter {
         currentTown.hunterArrives(hunter);
     }
 
+
     /**
      * Displays the menu and receives the choice from the user.<p>
      * The choice is sent to the processChoice() method for parsing.<p>
@@ -115,7 +126,6 @@ public class TreasureHunter {
      */
     private void showMenu() {
         String choice = "";
-
         while (!choice.equals("x")) {
          {
             System.out.println();

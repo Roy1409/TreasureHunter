@@ -147,21 +147,34 @@ public class Town {
 
     public void Treasure(){
         double rnd = Math.random();
+        int count = 0;
         String treasure = "";
         if (rnd < .25){
             System.out.println("You found a crown!");
             treasure = "crown";
             hunter.addTreasure(treasure);
+            if (hunter.hasTreasure(treasure)){
+                count++;
+            }
         } else if (rnd < .5){
             System.out.println("You found a trophy!");
             treasure = "trophy";
             hunter.addTreasure(treasure);
+            if (hunter.hasTreasure(treasure)){
+                count++;
+            }
         } else if (rnd < .75){
             System.out.println("You found a gem!");
             treasure = "gem";
             hunter.addTreasure(treasure);
+            if (hunter.hasTreasure(treasure)){
+                count++;
+            }
         } else {
             System.out.println("You found some dust...");
+        }
+        if (count == 3){
+            TreasureHunter.win(true);
         }
     }
 
