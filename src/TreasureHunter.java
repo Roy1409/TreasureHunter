@@ -148,6 +148,9 @@ public class TreasureHunter {
             if (hunter.getGold()<0) {
                 choice="x";
             }
+            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
+                choice="x";
+            }
 
         }
 
@@ -185,6 +188,7 @@ public class TreasureHunter {
         }else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }
+
     }
 
 

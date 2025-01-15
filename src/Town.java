@@ -158,24 +158,30 @@ public class Town {
         if (rnd < .25){
             System.out.println("You found a crown!");
             treasure = "crown";
-            hunter.addTreasure(treasure);
-            if (hunter.hasTreasure(treasure)){
-                count++;
+            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
+                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+
             }
+            hunter.addTreasure(treasure);
+
         } else if (rnd < .5){
             System.out.println("You found a trophy!");
             treasure = "trophy";
-            hunter.addTreasure(treasure);
-            if (hunter.hasTreasure(treasure)){
-                count++;
+            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
+                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+
             }
+            hunter.addTreasure(treasure);
+
         } else if (rnd < .75){
             System.out.println("You found a gem!");
             treasure = "gem";
-            hunter.addTreasure(treasure);
-            if (hunter.hasTreasure(treasure)){
-                count++;
+            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
+                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+
             }
+            hunter.addTreasure(treasure);
+
         } else {
             System.out.println("You found some dust...");
         }
