@@ -174,7 +174,7 @@ public class Hunter {
         String space = " ";
         for (String treasure : treasures) {
             if (treasure != null) {
-                printableTreasures += treasure + space;
+                printableTreasures +=  "a " + treasure + space;
             }
         }
         return printableTreasures;
@@ -187,10 +187,14 @@ public class Hunter {
         String str = hunterName + " has " + Colors.YELLOW + gold + Colors.RESET + " gold";
         if (!kitIsEmpty()) {
             str += " and " + Colors.PURPLE + getInventory() + Colors.RESET;
+            str += "\n";
         }
         if (!treasuresIsEmpty()) {
-            str += "and " + Colors.BLUE + getTreasures() + Colors.RESET;
+            str += "\nTreasures Found: " + Colors.BLUE  + getTreasures() + Colors.RESET;
+        } else {
+            str += "\nTreasures Found: none";
         }
+        str += "\n";
         return str;
     }
 
