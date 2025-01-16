@@ -158,27 +158,26 @@ public class Town {
         if (rnd < .25){
             System.out.println("You found a crown!");
             treasure = "crown";
-            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
-                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
-
+            if((!hunter.hasTreasure(treasure))) {
+            hunter.addCount(1);
             }
             hunter.addTreasure(treasure);
 
         } else if (rnd < .5){
             System.out.println("You found a trophy!");
             treasure = "trophy";
-            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
-                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
 
+            if((!hunter.hasTreasure(treasure))) {
+                hunter.addCount(1);
             }
             hunter.addTreasure(treasure);
 
         } else if (rnd < .75){
             System.out.println("You found a gem!");
             treasure = "gem";
-            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
-                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
 
+            if((!hunter.hasTreasure(treasure))) {
+                hunter.addCount(1);
             }
             hunter.addTreasure(treasure);
 
@@ -231,7 +230,7 @@ public void dig() {
         if (hunter.hasItemInKit("shovel")) {
             if(Math.random()>0.5) {
                 int gold= (int) (Math.random() * 20) +1;
-                System.out.println("You dug up "+gold+" gold!");
+                System.out.println("You dug up "+Colors.YELLOW+gold+Colors.RESET+" gold!");
                 hunter.setGold(hunter.getGold()+gold);
                 foundGold=true;
             } else{

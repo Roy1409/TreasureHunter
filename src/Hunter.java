@@ -13,6 +13,7 @@ public class Hunter {
     private String[] treasures;
     private int gold;
     private boolean testLose;
+    private int treasureCount;
 
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
@@ -21,7 +22,7 @@ public class Hunter {
      * @param startingGold The gold the hunter starts with.
      */
     public Hunter(String hunterName, int startingGold) {
-
+        treasureCount=0;
         this.hunterName = hunterName;
         if(Shop.issMode()) {
             kit=new String[8];
@@ -270,6 +271,13 @@ public class Hunter {
         addItem("horse");
         addItem("boots");
         addItem("shovel");
+    }
+
+    public int treasureCount() {
+        return treasureCount;
+    }
+    public void addCount(int x) {
+        treasureCount+=x;
     }
 
 

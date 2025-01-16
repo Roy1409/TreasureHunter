@@ -148,7 +148,8 @@ public class TreasureHunter {
             if (hunter.getGold()<0) {
                 choice="x";
             }
-            if(hunter.hasTreasure("a gem") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a crown")) {
+            if(hunter.treasureCount()==3) {
+                System.out.println(Colors.CYAN+"Congratulations, you have found the last of the three treasures, you win!"+Colors.RESET);
                 choice="x";
             }
 
