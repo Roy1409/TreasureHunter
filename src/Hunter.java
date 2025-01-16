@@ -126,7 +126,7 @@ public class Hunter {
             treasures[idx] = treasure;
             return true;
         } else {
-            System.out.println("You already have this treasure!");
+            x.addTextToWindow("You already have this treasure!",Color.black);
         }
         return false;
     }
@@ -190,9 +190,9 @@ public class Hunter {
     public void infoString() {
         x.addTextToWindow(hunterName + " has ",Color.black);
         x.addTextToWindow(""+gold,Color.yellow);
-        x.addTextToWindow("gold",Color.black);
+        x.addTextToWindow(" gold",Color.black);
         if (!kitIsEmpty()) {
-            x.addTextToWindow("and",Color.black);
+            x.addTextToWindow( " and ",Color.black);
             x.addTextToWindow(getInventory(), Color.magenta);
 
         }

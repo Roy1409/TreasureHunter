@@ -71,15 +71,17 @@ public class Town {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
-           x.addTextToWindow( "You used your " + item + " to cross the " + terrain.getTerrainName() + ".",Color.black);
+            x.clear();
+           x.addTextToWindow( "\nYou used your " + item + " to cross the " + terrain.getTerrainName() + ".\n",Color.black);
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
+
                 x.addTextToWindow("\nUnfortunately, you lost your "+item+".",Color.black);
             }
             return true;
         }
-
-        printMessage = "You can't leave town, " + hunter.getHunterName() + ". You don't have a " + terrain.getNeededItem() + ".";
+        x.clear();
+        x.addTextToWindow("\nYou can't leave town, " + hunter.getHunterName() + ".\nYou don't have a " + terrain.getNeededItem() + ".",Color.black);
         return false;
     }
 
@@ -87,9 +89,12 @@ public class Town {
      * Handles calling the enter method on shop whenever the user wants to access the shop.
      *
      * @param choice If the user wants to buy or sell items at the shop.
+     * @return
      */
-    public void enterShop(String choice) {
+    public String enterShop(String choice) {
         printMessage = shop.enter(hunter, choice);
+        return printMessage;
+
     }
 
     /**
@@ -166,7 +171,8 @@ public class Town {
         int count = 0;
         String treasure = "";
         if (rnd < .25){
-            System.out.println("You found a crown!");
+            x.clear();
+            x.addTextToWindow("\nYou found a crown!",Color.black);
             treasure = "crown";
             if((!hunter.hasTreasure(treasure))) {
             hunter.addCount(1);
@@ -174,7 +180,8 @@ public class Town {
             hunter.addTreasure(treasure);
 
         } else if (rnd < .5){
-            System.out.println("You found a trophy!");
+            x.clear();
+            x.addTextToWindow("\nYou found a trophy!",Color.black);
             treasure = "trophy";
 
             if((!hunter.hasTreasure(treasure))) {
@@ -183,7 +190,8 @@ public class Town {
             hunter.addTreasure(treasure);
 
         } else if (rnd < .75){
-            System.out.println("You found a gem!");
+            x.clear();
+            x.addTextToWindow("\nYou found a gem!",Color.black);
             treasure = "gem";
 
             if((!hunter.hasTreasure(treasure))) {
@@ -192,6 +200,7 @@ public class Town {
             hunter.addTreasure(treasure);
 
         } else {
+            x.clear();
             x.addTextToWindow("You found some dust...",Color.black);
         }
 
@@ -211,17 +220,17 @@ public class Town {
     private Terrain getNewTerrain() {
         double rnd = Math.random() * (1.2);
         if (rnd < .2) {
-            return new Terrain("Mountains", "Rope");
+            return new Terrain("Mountains", "Rope",x);
         } else if (rnd < .4) {
-            return new Terrain("Ocean", "Boat");
+            return new Terrain("Ocean", "Boat",x);
         } else if (rnd < .6) {
-            return new Terrain("Plains", "Horse");
+            return new Terrain("Plains", "Horse",x);
         } else if (rnd < .8) {
-            return new Terrain("Desert", "Water");
+            return new Terrain("Desert", "Water",x);
         } else if ( rnd < 1){
-            return new Terrain("Jungle", "Machete");
+            return new Terrain("Jungle", "Machete",x);
         } else {
-            return new Terrain("Marsh", "Boots");
+            return new Terrain("Marsh", "Boots",x);
         }
     }
 
@@ -242,16 +251,18 @@ public void dig() {
         if (hunter.hasItemInKit("shovel")) {
             if(Math.random()>0.5) {
                 int gold= (int) (Math.random() * 20) +1;
-                System.out.println("You dug up "+Colors.YELLOW+gold+Colors.RESET+" gold!");
+                x.addTextToWindow("\nYou dug up ",Color.black);
+                x.addTextToWindow(gold+"",Color.yellow);
+                x.addTextToWindow(" gold!",Color.black);
                 hunter.setGold(hunter.getGold()+gold);
                 foundGold=true;
             } else{
-                System.out.println("You dug but only found dirt.");
+                x.addTextToWindow("You dug but only found dirt",Color.black);
             }
         } else{
-            System.out.println("You can't dig for gold without a shovel.");
+            x.addTextToWindow("You can't dig for gold without a shovel.",Color.black);
         } } else{
-            System.out.println( "You already dug for gold in this town.");
+            x.addTextToWindow("You already dug for gold in this town.", Color.black);
         }
 }
     private void setEasy(boolean x) {
