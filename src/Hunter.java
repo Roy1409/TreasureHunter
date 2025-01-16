@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,7 @@ public class Hunter {
     private int gold;
     private boolean testLose;
     private int treasureCount;
+    private OutputWindow x;
 
     /**
      * The base constructor of a Hunter assigns the name to the hunter and an empty kit.
@@ -21,7 +23,8 @@ public class Hunter {
      * @param hunterName The hunter's name.
      * @param startingGold The gold the hunter starts with.
      */
-    public Hunter(String hunterName, int startingGold) {
+    public Hunter(String hunterName, int startingGold,OutputWindow x) {
+        this.x=x;
         treasureCount=0;
         this.hunterName = hunterName;
         if(Shop.issMode()) {
@@ -184,19 +187,22 @@ public class Hunter {
     /**
      * @return A string representation of the hunter.
      */
-    public String infoString() {
-        String str = hunterName + " has " + Colors.YELLOW + gold + Colors.RESET + " gold";
+    public void infoString() {
+        x.addTextToWindow(hunterName + " has ",Color.black);
+        x.addTextToWindow(""+gold,Color.yellow);
+        x.addTextToWindow("gold",Color.black);
         if (!kitIsEmpty()) {
-            str += " and " + Colors.PURPLE + getInventory() + Colors.RESET;
-            str += "\n";
+            x.addTextToWindow("and",Color.black);
+            x.addTextToWindow(getInventory(), Color.magenta);
+
         }
         if (!treasuresIsEmpty()) {
-            str += "\nTreasures Found: " + Colors.BLUE  + getTreasures() + Colors.RESET;
+            x.addTextToWindow("\nTreasures Found: ",Color.black);
+            x.addTextToWindow(getTreasures(),Color.blue);
         } else {
-            str += "\nTreasures Found: none";
+            x.addTextToWindow("\nTreasures Found: none",Color.black);
         }
-        str += "\n";
-        return str;
+
     }
 
     /**

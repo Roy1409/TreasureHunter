@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * The Town Class is where it all happens.
  * The Town is designed to manage all the things a Hunter can do in town.
@@ -13,16 +15,16 @@ public class Town {
     private boolean toughTown;
     private static boolean easyMode;
     private boolean foundGold;
-
+    private OutputWindow x;
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
      *
      * @param shop The town's shoppe.
      * @param toughness The surrounding terrain.
      */
-    public Town(Shop shop, double toughness) {
+    public Town(Shop shop, double toughness, OutputWindow x) {
         this.shop = shop;
-
+        this.x=x;
         this.terrain = getNewTerrain();
         foundGold=false;
 
@@ -52,11 +54,11 @@ public class Town {
      */
     public void hunterArrives(Hunter hunter) {
         this.hunter = hunter;
-        printMessage = "Welcome to town, " + hunter.getHunterName() + ".";
+       x.addTextToWindow("Welcome to town, " + hunter.getHunterName() + ".",Color.black);
         if (toughTown) {
-            printMessage += "\nIt's pretty rough around here, so watch yourself.";
+            x.addTextToWindow("\nIt's pretty rough around here, so watch yourself.",Color.black);
         } else {
-            printMessage += "\nWe're just a sleepy little town with mild mannered folk.";
+           x.addTextToWindow("\nWe're just a sleepy little town with mild mannered folk.",Color.black);
         }
     }
 
@@ -69,10 +71,10 @@ public class Town {
         boolean canLeaveTown = terrain.canCrossTerrain(hunter);
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
-            printMessage = "You used your " + item + " to cross the " + terrain.getTerrainName() + ".";
+           x.addTextToWindow( "You used your " + item + " to cross the " + terrain.getTerrainName() + ".",Color.black);
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
-                printMessage += "\nUnfortunately, you lost your "+item+".";
+                x.addTextToWindow("\nUnfortunately, you lost your "+item+".",Color.black);
             }
             return true;
         }
@@ -114,36 +116,44 @@ public class Town {
             }
         }
         if (Math.random() > noTroubleChance) {
-            printMessage = "You couldn't find any trouble";
+            x.addTextToWindow("You couldn't find any trouble \n", Color.BLACK);
+
         } else {
-            printMessage = Colors.RED + "You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n" + Colors.RESET;
+            x.addTextToWindow("You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n",Color.red);
             int goldDiff = (int) (Math.random() * 10) + 1;
             if(Shop.issMode() && hunter.hasItemInKit("sword")) {
-                printMessage += Colors.GREEN + "The brawler, seeing your sword, realizes he picked a losing fight and gives you his gold" + Colors.RESET;
-                printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
+               x.addTextToWindow("The brawler, seeing your sword, realizes he picked a losing fight and gives you his gold",Color.black);
+               x.addTextToWindow("\nYou won the brawl and receive ",Color.black);
+               x.addTextToWindow(goldDiff+" ",Color.yellow);
                 hunter.changeGold(goldDiff);
             } else {
                 if (Math.random() > noTroubleChance) {
 
                     if (easyMode && Math.random() < win) {
-                        printMessage += Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold." + Colors.RESET;
-                        printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
+                        x.addTextToWindow("Okay, stranger! You proved yer mettle. Here, take my gold.",Color.red);
+                        x.addTextToWindow("\nYou won the brawl and receive ",Color.black);
+                        x.addTextToWindow(goldDiff+" ",Color.yellow);
+                        x.addTextToWindow("gold",Color.black);
                         hunter.changeGold(goldDiff);
                     } else {
-                        printMessage += Colors.RED + "Okay, stranger! You proved yer mettle. Here, take my gold." + Colors.RESET;
-                        printMessage += "\nYou won the brawl and receive " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
+                        x.addTextToWindow("\nOkay, stranger! You proved yer mettle. Here, take my gold.",Color.red);
+                        x.addTextToWindow("\nYou won the brawl and receive ",Color.black);
+                        x.addTextToWindow(goldDiff+" ",Color.yellow);
+                        x.addTextToWindow("gold",Color.black);
                         hunter.changeGold(goldDiff);
                     }
 
                 } else {
-                    printMessage += Colors.RED + "That'll teach you to go lookin' fer trouble in MY town! Now pay up!" + Colors.RESET;
-                    printMessage += "\nYou lost the brawl and pay " + Colors.YELLOW + goldDiff + Colors.RESET + " gold.";
+                    x.addTextToWindow("That'll teach you to go lookin' fer trouble in MY town! Now pay up!",Color.red);
+                    x.addTextToWindow("\nYou lost the brawl and receive ",Color.black);
+                    x.addTextToWindow(goldDiff+" ",Color.yellow);
+                    x.addTextToWindow("gold",Color.black);
                     hunter.changeGold(-goldDiff);
 
                     if (hunter.getGold() < 0) {
-                        System.out.println(getLatestNews());
-                        System.out.println(hunter.getHunterName() + " is in debt (-gold) ");
-                        System.out.println("GAME OVER");
+                        x.addTextToWindow(getLatestNews()+"\n",Color.black);
+                        x.addTextToWindow("\n"+hunter.getHunterName() + " is in debt (-gold) ",Color.black);
+                        x.addTextToWindow("\nGAME OVER!",Color.black);
                     }
                 }
             }
@@ -182,13 +192,15 @@ public class Town {
             hunter.addTreasure(treasure);
 
         } else {
-            System.out.println("You found some dust...");
+            x.addTextToWindow("You found some dust...",Color.black);
         }
 
     }
 
-    public String infoString() {
-        return "This nice little town is surrounded by " + Colors.CYAN + terrain.getTerrainName() + Colors.RESET + ".";
+    public void infoString() {
+        x.addTextToWindow("\nThis nice little town is surrounded by " ,Color.black);
+        x.addTextToWindow(terrain.getTerrainName(),Color.CYAN);
+        x.addTextToWindow(".",Color.black);
     }
 
     /**

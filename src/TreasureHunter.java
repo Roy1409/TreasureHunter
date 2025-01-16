@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -19,6 +20,7 @@ public class TreasureHunter {
     private boolean easyMode;
     private boolean searched;
     private boolean win;
+    private final OutputWindow x=new OutputWindow();
 
     /**
      * Constructs the Treasure Hunter game.
@@ -34,36 +36,41 @@ public class TreasureHunter {
     }
 
 
+
+
     /**
      * Starts the game; this is the only public method
      */
     public void play() {
             welcomePlayer();
+            x.clear();
             if (!win) {
                 enterTown();
                 showMenu();
             } else {
-                System.out.println("Congratulations, you have found the last of the three treasures, you win!");
+                x.addTextToWindow("Congratulations, you have found the last of the three treasures, you win!", Color.CYAN);
             }
+            x.clear();
     }
 
     /**
      * Creates a hunter object at the beginning of the game and populates the class member variable with it.
      */
     private void welcomePlayer() {
-        System.out.println("Welcome to TREASURE HUNTER!");
-        System.out.println("Going hunting for the big treasure, eh?");
-        System.out.print("What's your name, Hunter? ");
+        x.addTextToWindow("Welcome to TREASURE HUNTER!\n",Color.BLACK);
+        x.addTextToWindow("\nGoing hunting for the big treasure, eh?",Color.BLACK);
+        x.addTextToWindow("\nWhat's your name, Hunter? ",Color.black);
         String name = SCANNER.nextLine().toLowerCase();
 
         // set hunter instance variable
-        hunter = new Hunter(name, 20);
+        hunter = new Hunter(name, 20,x);
 
-        System.out.print("mode? (e/n/h): ");
+        x.addTextToWindow("\nmode? (e/n/h): \n",Color.black);
         String hard = SCANNER.nextLine().toLowerCase();
+
         if (hard.equals("e")) {
             easyMode=true;
-            hunter=new Hunter(name,40);
+            hunter=new Hunter(name,40,x);
 
         }
         if(hard.equals("s")) {
@@ -71,14 +78,14 @@ public class TreasureHunter {
         }
         if (hard.equals("h")) {
             hardMode = true;
-            hunter=new Hunter(name,10);
+            hunter=new Hunter(name,10,x);
 
         } else if (hard.equals("test")) {
-            hunter=new Hunter(name, 100);
+            hunter=new Hunter(name, 100,x);
             hunter.addAll();
         }
         else if (hard.equals("testlose")) {
-            hunter=new Hunter(name,5);
+            hunter=new Hunter(name,5,x);
             hunter.setTestLose(true);
 
         }
@@ -108,7 +115,7 @@ public class TreasureHunter {
         // creating the new Town -- which we need to store as an instance
         // variable in this class, since we need to access the Town
         // object in other methods of this class
-        currentTown = new Town(shop, toughness);
+        currentTown = new Town(shop, toughness,x);
         searched = false;
 
         // calling the hunterArrives method, which takes the Hunter
@@ -127,22 +134,14 @@ public class TreasureHunter {
     private void showMenu() {
         String choice = "";
         while (!choice.equals("x")) {
+
          {
-            System.out.println();
-            System.out.println(currentTown.getLatestNews());
-            System.out.println("***");
-            System.out.println(hunter.infoString());
-            System.out.println(currentTown.infoString());
-            System.out.println("(B)uy something at the shop.");
-            System.out.println("(S)ell something at the shop.");
-            System.out.println("(E)xplore surrounding terrain.");
-            System.out.println("(M)ove on to a different town.");
-            System.out.println("(L)ook for trouble!");
-            System.out.println("(H)unt for treasure");
-             System.out.println("(D)ig for gold!");
-            System.out.println("Give up the hunt and e(X)it.");
-            System.out.println();
-            System.out.print("What's your next move? ");
+
+             x.addTextToWindow(currentTown.getLatestNews()+"\n***\n",Color.black);
+            hunter.infoString();
+            currentTown.infoString();
+            x.addTextToWindow("\n"+"(S)ell something at the shop."+"\n(E)xplore surrounding terrain."+"\n(M)ove on to a different town."+"\n(L)ook for trouble!"+"\n(H)unt for treasure"+"\nGive up the hunt and e(X)it.\n What's your next move? ",Color.black);
+
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice); }
             if (hunter.getGold()<0) {
@@ -152,8 +151,10 @@ public class TreasureHunter {
                 System.out.println(Colors.CYAN+"Congratulations, you have found the last of the three treasures, you win!"+Colors.RESET);
                 choice="x";
             }
+            x.clear();
 
         }
+
 
         }
 
