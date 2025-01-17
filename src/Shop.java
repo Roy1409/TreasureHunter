@@ -57,17 +57,21 @@ public class Shop {
 
             int cost = checkMarketPrice(item, true);
             if (cost == 0 && !Shop.issMode()) {
+                x.clear();
                x.addTextToWindow("We ain't got none of those.",Color.black);
             } else {
                  if(sMode && !item.equals("sword") && hunter.hasItemInKit("sword") ) {
                      if(cost != 0) {
+                         x.clear();
                     x.addTextToWindow("The sword intimidates the shopkeeper and he gives you the item freely",Color.GREEN);
                      buyItem(item);}
                  } else{
                 x.addTextToWindow("\nIt'll cost you " + cost + " gold. \nBuy it (y/n)? ",Color.black);
                 String option = SCANNER.nextLine().toLowerCase();
                 if (option.equals("y")) {
-                    buyItem(item); }
+                    x.clear();
+                    buyItem(item);
+                }
                 }
             }
         } else {
@@ -85,7 +89,7 @@ public class Shop {
                 }
             }
         }
-        x.clear();
+
         return "";
     }
 
@@ -118,8 +122,10 @@ public class Shop {
         int costOfItem = checkMarketPrice(item, true);
         if(sMode) {
             if(customer.hasItemInKit("sword") &&item.equals("sword")) {
+                x.clear();
                x.addTextToWindow("HEY, don't get a second sword. ",Color.black);
             } else{
+
             costOfItem = 0;
             customer.buyItem(item,costOfItem);
             }
@@ -127,7 +133,8 @@ public class Shop {
 
         } else{
         if (customer.buyItem(item, costOfItem)) {
-            x.addTextToWindow("Ye' got yerself a " + item + ". Come again soon.",Color.black);
+
+            x.addTextToWindow("Ye' got yerself a " + item + ". \nCome again soon.",Color.black);
 
         } else {
             x.addTextToWindow("Hmm, either you don't have enough gold or you've already got one of those!",Color.black);

@@ -169,6 +169,7 @@ public class TreasureHunter {
         if (choice.equals("b") || choice.equals("s")) {
             x.clear();
             x.addTextToWindow(currentTown.enterShop(choice),Color.black);
+
         } else if (choice.equals("e")) {
             x.clear();
            currentTown.getTerrain().infoString();

@@ -127,7 +127,7 @@ public class Town {
             x.addTextToWindow("You want trouble, stranger!  You got it!\nOof! Umph! Ow!\n",Color.red);
             int goldDiff = (int) (Math.random() * 10) + 1;
             if(Shop.issMode() && hunter.hasItemInKit("sword")) {
-               x.addTextToWindow("The brawler, seeing your sword, realizes he picked a losing fight and gives you his gold",Color.black);
+               x.addTextToWindow("The brawler, seeing your sword, realizes he picked a losing fight and gives you his gold",Color.GREEN);
                x.addTextToWindow("\nYou won the brawl and receive ",Color.black);
                x.addTextToWindow(goldDiff+" ",Color.yellow);
                 hunter.changeGold(goldDiff);
