@@ -127,9 +127,15 @@ public class Shop {
                 x.addTextToWindow("Ye' got yerself a " + item + ". \nCome again soon.",Color.black);
                 customer.buyItem(item,costOfItem);
             }
+            if(item.equals("sword")) {
+
+            }
             if(customer.hasItemInKit("sword") &&item.equals("sword")) {
                 x.clear();
                x.addTextToWindow("HEY, don't get a second sword. ",Color.black);
+            }
+            else if(item.equals("sword")) {
+            x.addTextToWindow("This sword shall help you on ur journey.",Color.cyan);
             } else{
 
             costOfItem = 0;
