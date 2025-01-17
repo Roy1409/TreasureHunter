@@ -136,17 +136,19 @@ public class TreasureHunter {
         while (!choice.equals("x")) {
 
          {
+             if (hunter.getGold()<0) {
 
-             x.addTextToWindow(currentTown.getLatestNews()+"\n***\n",Color.black);
-            hunter.infoString();
-            currentTown.infoString();
-            x.addTextToWindow("\n"+"(B)uy something at the shop\n(S)ell something at the shop."+"\n(E)xplore surrounding terrain."+"\n(M)ove on to a different town."+"\n(L)ook for trouble!"+"\n(H)unt for treasure \n(D)ig for gold"+"\nGive up the hunt and e(X)it.\nWhat's your next move? ",Color.black);
-
+                 choice="x";
+             }
+             if (!choice.equals("x")) {
+                 x.addTextToWindow(currentTown.getLatestNews() + "\n***\n", Color.black);
+                 hunter.infoString();
+                 currentTown.infoString();
+                 x.addTextToWindow("\n" + "(B)uy something at the shop\n(S)ell something at the shop." + "\n(E)xplore surrounding terrain." + "\n(M)ove on to a different town." + "\n(L)ook for trouble!" + "\n(H)unt for treasure \n(D)ig for gold" + "\nGive up the hunt and e(X)it.\nWhat's your next move? ", Color.black);
+             }
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice); }
-            if (hunter.getGold()<0) {
-                choice="x";
-            }
+
             if(hunter.treasureCount()==3) {
                 System.out.println(Colors.CYAN+"Congratulations, you have found the last of the three treasures, you win!"+Colors.RESET);
                 choice="x";

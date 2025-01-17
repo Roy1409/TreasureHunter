@@ -76,7 +76,7 @@ public class Town {
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
 
-                x.addTextToWindow("\nUnfortunately, you lost your "+item+".",Color.black);
+                x.addTextToWindow("\nUnfortunately, you lost your "+item+".\n",Color.black);
             }
             return true;
         }
@@ -150,15 +150,15 @@ public class Town {
 
                 } else {
                     x.addTextToWindow("That'll teach you to go lookin' fer trouble in MY town! Now pay up!",Color.red);
-                    x.addTextToWindow("\nYou lost the brawl and receive ",Color.black);
+                    x.addTextToWindow("\nYou lost the brawl and lose ",Color.black);
                     x.addTextToWindow(goldDiff+" ",Color.yellow);
                     x.addTextToWindow("gold",Color.black);
                     hunter.changeGold(-goldDiff);
 
                     if (hunter.getGold() < 0) {
                         x.addTextToWindow(getLatestNews()+"\n",Color.black);
-                        x.addTextToWindow("\n"+hunter.getHunterName() + " is in debt (-gold) ",Color.black);
-                        x.addTextToWindow("\nGAME OVER!",Color.black);
+                        x.addTextToWindow("\n"+hunter.getHunterName() + " is in debt (-gold) ",Color.CYAN);
+                        x.addTextToWindow("\nGAME OVER!",Color.CYAN);
                     }
                 }
             }
