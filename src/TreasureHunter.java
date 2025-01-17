@@ -133,18 +133,18 @@ public class TreasureHunter {
          {
              if (hunter.getGold()<0) {
 
-                 choice="x";
+                 break;
              }
              if(hunter.treasureCount()==3) {
                  x.addTextToWindow("\nCongratulations, you have found the last of the three treasures, you win!",Color.CYAN);
-                 choice="x";
+                 break;
              }
-             if (!choice.equals("x")) {
+
                  x.addTextToWindow(currentTown.getLatestNews() + "\n***\n", Color.black);
                  hunter.infoString();
                  currentTown.infoString();
                  x.addTextToWindow("\n" + "(B)uy something at the shop\n(S)ell something at the shop." + "\n(E)xplore surrounding terrain." + "\n(M)ove on to a different town." + "\n(L)ook for trouble!" + "\n(H)unt for treasure \n(D)ig for gold" + "\nGive up the hunt and e(X)it.\nWhat's your next move? ", Color.black);
-             }
+
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice); }
 

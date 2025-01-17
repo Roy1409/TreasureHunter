@@ -51,6 +51,8 @@ public class Shop {
         if (buyOrSell.equals("b")) {
             x.addTextToWindow("\nWelcome to the shop! We have the finest wares in town.", Color.black);
             x.addTextToWindow("\nCurrently we have the following items:",Color.black);
+            x.addTextToWindow("\nGold Count: ",Color.black);
+            x.addTextToWindow(""+customer.getGold(),Color.yellow);
             x.addTextToWindow(inventory(),Color.black);
             x.addTextToWindow("\nWhat're you lookin' to buy? ",Color.black);
             String item = SCANNER.nextLine().toLowerCase();
@@ -100,7 +102,9 @@ public class Shop {
      * @return the string representing the shop's items available for purchase and their prices.
      */
     public String inventory() {
+
         String str = "\nWater: " + WATER_COST + " gold\n";
+
         str += "Rope: " + ROPE_COST + " gold\n";
         str += "Machete: " + MACHETE_COST + " gold\n";
         str += "Horse: " + HORSE_COST + " gold\n";
