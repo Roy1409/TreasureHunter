@@ -46,7 +46,7 @@ public class Shop {
      * @return a String to be used for printing in the latest news
      */
     public String enter(Hunter hunter, String buyOrSell) {
-        x.clear();
+
         customer = hunter;
         if (buyOrSell.equals("b")) {
             x.addTextToWindow("\nWelcome to the shop! We have the finest wares in town.", Color.black);
@@ -119,8 +119,14 @@ public class Shop {
      * @param item The item being bought.
      */
     public void buyItem(String item) {
+
         int costOfItem = checkMarketPrice(item, true);
+
         if(sMode) {
+            if(!customer.hasItemInKit("Sword")) {
+                x.addTextToWindow("Ye' got yerself a " + item + ". \nCome again soon.",Color.black);
+                customer.buyItem(item,costOfItem);
+            }
             if(customer.hasItemInKit("sword") &&item.equals("sword")) {
                 x.clear();
                x.addTextToWindow("HEY, don't get a second sword. ",Color.black);
