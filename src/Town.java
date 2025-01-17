@@ -73,7 +73,7 @@ public class Town {
             String item = terrain.getNeededItem();
             x.clear();
             if(terrain.getTerrainName().equals("Jungle") && hunter.hasItemInKit("sword") ){
-                x.addTextToWindow("\nYou slash your way across the jungle!",Color.cyan);
+                x.addTextToWindow("\nYou slash your way across the jungle!\n",Color.cyan);
             } else{
            x.addTextToWindow( "\nYou used your " + item + " to cross the " + terrain.getTerrainName() + ".\n",Color.black);}
             if (checkItemBreak()) {
