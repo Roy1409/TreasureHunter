@@ -140,6 +140,10 @@ public class TreasureHunter {
 
                  choice="x";
              }
+             if(hunter.treasureCount()==3) {
+                 x.addTextToWindow("Congratulations, you have found the last of the three treasures, you win!",Color.CYAN);
+                 choice="x";
+             }
              if (!choice.equals("x")) {
                  x.addTextToWindow(currentTown.getLatestNews() + "\n***\n", Color.black);
                  hunter.infoString();
@@ -149,10 +153,6 @@ public class TreasureHunter {
             choice = SCANNER.nextLine().toLowerCase();
             processChoice(choice); }
 
-            if(hunter.treasureCount()==3) {
-                System.out.println(Colors.CYAN+"Congratulations, you have found the last of the three treasures, you win!"+Colors.RESET);
-                choice="x";
-            }
 
 
         }

@@ -63,7 +63,7 @@ public class Shop {
                  if(sMode && !item.equals("sword") && hunter.hasItemInKit("sword") ) {
                      if(cost != 0) {
                          x.clear();
-                    x.addTextToWindow("The sword intimidates the shopkeeper and he gives you the item freely",Color.GREEN);
+                    x.addTextToWindow("The sword intimidates the shopkeeper and he gives you the item freely\n",Color.GREEN);
                      buyItem(item);}
                  } else{
                 x.addTextToWindow("\nIt'll cost you " + cost + " gold. \nBuy it (y/n)? ",Color.black);
@@ -123,7 +123,7 @@ public class Shop {
         int costOfItem = checkMarketPrice(item, true);
 
         if(sMode) {
-            if(!customer.hasItemInKit("Sword")) {
+            if(!customer.hasItemInKit("Sword") && !(item.equals("sword"))) {
                 x.addTextToWindow("Ye' got yerself a " + item + ". \nCome again soon.",Color.black);
                 customer.buyItem(item,costOfItem);
             }
