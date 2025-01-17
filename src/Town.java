@@ -72,7 +72,10 @@ public class Town {
         if (canLeaveTown) {
             String item = terrain.getNeededItem();
             x.clear();
-           x.addTextToWindow( "\nYou used your " + item + " to cross the " + terrain.getTerrainName() + ".\n",Color.black);
+            if(terrain.getTerrainName().equals("Jungle") && hunter.hasItemInKit("sword") ){
+                x.addTextToWindow("\nYou slash your way across the jungle!",Color.cyan);
+            } else{
+           x.addTextToWindow( "\nYou used your " + item + " to cross the " + terrain.getTerrainName() + ".\n",Color.black);}
             if (checkItemBreak()) {
                 hunter.removeItemFromKit(item);
 
@@ -191,7 +194,7 @@ public class Town {
 
         } else if (rnd < .75){
             x.clear();
-            x.addTextToWindow("\nYou found a gem!",Color.black);
+            x.addTextToWindow("\nYou found a gem!\n",Color.black);
             treasure = "gem";
 
             if((!hunter.hasTreasure(treasure))) {

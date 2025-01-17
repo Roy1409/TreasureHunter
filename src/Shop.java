@@ -135,6 +135,7 @@ public class Shop {
                x.addTextToWindow("HEY, don't get a second sword. ",Color.black);
             }
             else if(item.equals("sword")) {
+                customer.buyItem(item,0);
             x.addTextToWindow("This sword shall help you on ur journey.",Color.cyan);
             } else{
 

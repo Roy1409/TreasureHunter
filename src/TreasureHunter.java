@@ -141,7 +141,7 @@ public class TreasureHunter {
                  choice="x";
              }
              if(hunter.treasureCount()==3) {
-                 x.addTextToWindow("Congratulations, you have found the last of the three treasures, you win!",Color.CYAN);
+                 x.addTextToWindow("\nCongratulations, you have found the last of the three treasures, you win!",Color.CYAN);
                  choice="x";
              }
              if (!choice.equals("x")) {
