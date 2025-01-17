@@ -44,13 +44,8 @@ public class TreasureHunter {
     public void play() {
             welcomePlayer();
             x.clear();
-            if (!win) {
-                enterTown();
-                showMenu();
-            } else {
-                x.addTextToWindow("Congratulations, you have found the last of the three treasures, you win!", Color.CYAN);
-            }
-            x.clear();
+            enterTown();
+            showMenu();
     }
 
     /**
@@ -133,7 +128,7 @@ public class TreasureHunter {
      */
     private void showMenu() {
         String choice = "";
-        while (!choice.equals("x")) {
+        while (!(choice.equals("x"))) {
 
          {
              if (hunter.getGold()<0) {
